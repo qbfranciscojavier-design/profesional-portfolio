@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+/* 🛡️ PROTOCOLO DE BLINDAJE PARA IMPRESIÓN */
+@media print {
+
+  /* Hacemos desaparecer las imágenes y las tarjetas de los cursos */
+  img,
+  .group,
+  canvas,
+  [class*="bg-slate-900"] {
+    display: none !important;
+  }
+
+  /* Mostramos un mensaje de advertencia legal en la hoja de papel */
+  body::after {
+    content: "ACCESO RESTRINGIDO: ESTE PORTAFOLIO Y SUS CERTIFICADOS ESTÁN PROTEGIDOS POR CIFRADO. LA IMPRESIÓN NO ESTÁ PERMITIDA POR SEGURIDAD DE DATOS.";
+    display: block;
+    margin-top: 50px;
+    padding: 40px;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 22pt;
+    font-weight: bold;
+    color: #ff0000;
+    border: 5px solid #ff0000;
+  }
+}

@@ -7,7 +7,7 @@ const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env
 export default function Login() {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
@@ -24,9 +24,9 @@ export default function Login() {
       <div className="bg-slate-900 p-8 rounded-xl border border-slate-800">
         <h2 className="text-white text-2xl font-bold mb-6">Acceso Admin 🔐</h2>
         <form onSubmit={handleLogin} className="flex flex-col gap-4">
-          <input 
-            type="email" 
-            placeholder="tu@email.com" 
+          <input
+            type="email"
+            placeholder="tu@email.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="p-3 rounded bg-slate-800 text-white border border-slate-700"

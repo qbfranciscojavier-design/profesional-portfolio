@@ -17,20 +17,20 @@ const supabase = createClient(
 );
 
 // Componente para proteger la ruta Admin
-function ProtectedRoute({ children }: { children: any }) {
-  const [session, setSession] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+//function ProtectedRoute({ children }: { children: any }) {
+const [session, setSession] = useState<any>(null);
+const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setLoading(false);
-    });
-  }, []);
+useEffect(() => {
+  supabase.auth.getSession().then(({ data: { session } }) => {
+    setSession(session);
+    setLoading(false);
+  });
+}, []);
 
-  if (loading) return <div>Cargando...</div>;
-  if (!session) return <Navigate to="/login" />;
-  return children;
+if (loading) return <div>Cargando...</div>;
+if (!session) return <Navigate to="/login" />;
+return children;
 }
 
 // Tu CV Público (Lo que ya tenías)

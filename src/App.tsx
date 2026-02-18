@@ -1,59 +1,38 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createClient } from '@supabase/supabase-js';
 
-// Importa tus componentes
+// Componentes
 import Hero from './components/Hero';
 import Pacientum from './components/Pacientum';
 import Experience from './components/Experience';
 import Courses from './components/Courses';
-import AdminDashboard from './components/AdminDashboard'; // Crearemos esto abajo
-import Login from './components/Login'; // Crearemos esto abajo
+import Login from './components/Login';
 
-// Cliente Supabase (puedes importarlo desde lib/supabase.ts si ya lo tienes ahí)
+// Cliente Supabase
 const supabase = createClient(
   import.meta.env.VITE_SUPABASE_URL,
   import.meta.env.VITE_SUPABASE_ANON_KEY
 );
 
-// Componente para proteger la ruta Admin
-//function ProtectedRoute({ children }: { children: any }) {
-const [session, setSession] = useState<any>(null);
-const [loading, setLoading] = useState(true);
-
-useEffect(() => {
-  supabase.auth.getSession().then(({ data: { session } }) => {
-    setSession(session);
-    setLoading(false);
-  });
-}, []);
-
-if (loading) return <div>Cargando...</div>;
-if (!session) return <Navigate to="/login" />;
-return children;
-}
-
-// Tu CV Público (Lo que ya tenías)
+// Tu CV Público
 function PublicCV() {
   return (
     <div className="bg-slate-900 min-h-screen text-slate-200">
-      {/* Tu Navbar aquí... */}
       <Hero />
       <Pacientum />
       <Experience />
       <Courses />
-      {/* Tu Footer aquí... */}
     </div>
   );
 }
 
+// App Principal
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<PublicCV />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/admin" element={<AdminDashboard />} />
       </Routes>
     </BrowserRouter>
   );
